@@ -102,7 +102,7 @@ export default function Cover() {
                             hoverIntensity={0.5} 
                             enableHover={false}
                         >
-                            Portfolio
+                            Portfolio 
                         </FuzzyText>
                         <Year>2025</Year>
                         <Name>Kim Min Seok</Name>
