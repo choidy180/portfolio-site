@@ -73,15 +73,15 @@ const JobTitle = styled.div`
     margin-top: 0.4rem;
 `;
 
-const ConfidentialStamp = styled.img`
-    position: absolute;
-    bottom: 8%;
-    right: 5%;
-    width: 150px;
-    min-width: 10vw;
-    transform: rotate(-10deg);
-    opacity: 0.85;
-`;
+// const ConfidentialStamp = styled.img`
+//     position: absolute;
+//     bottom: 8%;
+//     right: 5%;
+//     width: 150px;
+//     min-width: 10vw;
+//     transform: rotate(-10deg);
+//     opacity: 0.85;
+// `;
 
 export default function Cover() {
     return (
@@ -108,7 +108,7 @@ export default function Cover() {
                         <Name>Kim Min Seok</Name>
                         <JobTitle>Web Developer</JobTitle>
 
-                        <ConfidentialStamp src="/confidential_stamp_only.png" alt="stamp" />
+                        {/* <ConfidentialStamp src="/confidential_stamp_only.png" alt="stamp" /> */}
                     </ContentBox>
                 </CenteredBox>
             </CoverWrapper>
