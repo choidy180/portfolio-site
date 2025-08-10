@@ -1,103 +1,120 @@
-import Image from "next/image";
+'use client';
+import Ballpit from '@/components/ballpit';
+import CareerColumns from '@/components/careerColumns';
+import ContentBox1 from '@/components/contentBox1';
+import FuzzyText from '@/components/fuzzyText';
+import Introduce from '@/components/introduce';
+import styled from 'styled-components';
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const CoverWrapper = styled.div`
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    /* background-image: url('/qhd_wallpaper.png'); */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+`;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+const CenteredBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    width: 100vw;
+    height: 100vh;
+`;
+
+const ContentBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+
+    color: #fff;
+
+    width: 100vw;
+    height: 100vh;
+
+    left: 0;
+    top: 0;
+`
+
+const Year = styled.div`
+    background-color: #000;
+    color: #fff;
+    font-size: 1.3rem;
+    padding: 0.4rem 1rem;
+    letter-spacing: 0.2rem;
+    margin-top: 4rem;
+`;
+
+const Name = styled.div`
+    background-color: #000;
+    color: #fff;
+    padding: 0.3rem 1rem;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    font-family: 'Courier New', monospace;
+    margin-top: 2rem;
+`;
+
+const JobTitle = styled.div`
+    background-color: #000;
+    color: #fff;
+    padding: 0.2rem 0.8rem;
+    font-size: 1.2rem;
+    font-family: 'Courier New', monospace;
+    margin-top: 0.4rem;
+`;
+
+const ConfidentialStamp = styled.img`
+    position: absolute;
+    bottom: 8%;
+    right: 5%;
+    width: 150px;
+    min-width: 10vw;
+    transform: rotate(-10deg);
+    opacity: 0.85;
+`;
+
+export default function Cover() {
+    return (
+        <>
+            <CoverWrapper>
+                <CenteredBox>
+                    <Ballpit
+                        count={140}
+                        gravity={0.1}
+                        friction={0.9975}
+                        wallBounce={0.95}
+                        followCursor={false}
+                        ambientColor={16777215}
+                    />
+                    <ContentBox>
+                        <FuzzyText 
+                            baseIntensity={0.2} 
+                            hoverIntensity={0.5} 
+                            enableHover={false}
+                        >
+                            Portfolio
+                        </FuzzyText>
+                        <Year>2025</Year>
+                        <Name>Kim Min Seok</Name>
+                        <JobTitle>Web Developer</JobTitle>
+
+                        <ConfidentialStamp src="/confidential_stamp_only.png" alt="stamp" />
+                    </ContentBox>
+                </CenteredBox>
+            </CoverWrapper>
+            <Introduce/>
+            <CareerColumns/>
+            <ContentBox1/>
+        </>
+    );
 }
