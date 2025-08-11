@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import { SiAdobephotoshop, SiAdobepremierepro, SiCss3, SiDiscord, SiFigma, SiFirebase, SiHtml5, SiJavascript, SiMariadb, SiMongodb, SiMysql, SiNextdotjs, SiNodedotjs, SiOpenai, SiPython, SiReact, SiStackoverflow, SiStyledcomponents, SiTailwindcss, SiTypescript } from 'react-icons/si';
 import { BiLogoVisualStudio } from 'react-icons/bi';
-import DotGrid from './dotGrid';
+import LightRays from './lightRays';
 
 const Container = styled.section`
     position: relative;
@@ -29,6 +29,7 @@ const Grid = styled.div`
     gap: 4rem;
     justify-content: space-between;
     flex-wrap: wrap;
+    z-index: 3;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -99,8 +100,8 @@ const Item = styled.li`
     line-height: 1.5;
     margin-bottom: 0.3rem;
     display: flex;
-    pointer-events: none;
     user-select: none;
+    font-size: 1;
 
     div {
         flex-shrink: 0;
@@ -108,6 +109,10 @@ const Item = styled.li`
         transform: scaleX(0.9);
         margin-left: -4px;
         font-weight: 600;
+
+        span {
+            background-color: #000000;
+        }
     }
 `;
 
@@ -115,17 +120,17 @@ export default function CareerColumns() {
     return (
         <Container>
             <div style={{ width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px' }}>
-                <DotGrid
-                    dotSize={5}
-                    gap={15}
-                    baseColor="#30336b"
-                    activeColor="#5227ff"
-                    proximity={100}
-                    shockRadius={250}
-                    shockStrength={5}
-                    resistance={750}
-                    returnDuration={1}
-                    maxSpeed={5000}
+                <LightRays
+                    raysOrigin="top-center"
+                    raysColor="#ffffff"
+                    raysSpeed={1.5}
+                    lightSpread={0.8}
+                    rayLength={1.2}
+                    followMouse={true}
+                    mouseInfluence={0.1}
+                    noiseAmount={0.1}
+                    distortion={0.05}
+                    className="custom-rays"
                 />
             </div>
             <Grid>
@@ -160,11 +165,11 @@ export default function CareerColumns() {
 
                     <Entry>
                         <List>
-                            <Item><div>2019-2022</div>동서대 DN 연구실 연구원</Item>
-                            <Item><div>2022</div>동서대 온라인 졸업 전시회 제작</Item>
-                            <Item><div>2021</div>레드닷 디자인 어워드 위너</Item>
-                            <Item><div>2020</div>KOSPO 웹서비스 정보보안<br/>경진대회 준우승</Item>
-                            <Item><div>2019</div>부산 청년일자리 해커톤 준우승</Item>
+                            <Item><div>2019-2022</div><span>동서대 DN 연구실 연구원</span></Item>
+                            <Item><div>2022</div><span>동서대 온라인 졸업 전시회 제작</span></Item>
+                            <Item><div>2021</div><span>레드닷 디자인 어워드 위너</span></Item>
+                            <Item><div>2020</div><span>KOSPO 웹서비스 정보보안<br/>경진대회 준우승</span></Item>
+                            <Item><div>2019</div><span>부산 청년일자리 해커톤 준우승</span></Item>
                         </List>
                     </Entry>
                 </Column>

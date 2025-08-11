@@ -12,6 +12,7 @@
     "@appletosolutions/reactbits": "^1.0.3",
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.3.0",
+    "aos": "^2.3.4",
     "babel-plugin-styled-components": "^2.1.4",
     "gsap": "^3.13.0",
     "maath": "^0.10.8",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/aos": "^3.0.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

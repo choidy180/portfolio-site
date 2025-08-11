@@ -7,6 +7,7 @@ import DesignImage from '../public/designGreen.png';
 import ClientImage from '../public/clientBlue.png';
 import ExperienceImage from '../public/experienceWhite.png';
 import Ribbons from "./ribbons";
+import Aurora from "./aurora";
 
 const Container = styled.div`
     position: relative;
@@ -94,11 +95,28 @@ const ColorBox = styled.div.withConfig({shouldForwardProp: (prop) => prop !== "$
     }
 `;
 
+const BgBox = styled.div`
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+`
+
 
 const Introduce = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     return (
         <Container>
+            <BgBox>
+                <Aurora
+                    colorStops={["#ff3cac", "#784ba0", "#2b86c5"]}
+                    blend={0.5}
+                    amplitude={1.0}
+                    speed={0.5}
+                />
+            </BgBox>
             <Title>
                 {/* <DecryptedText
                     text="“ 항상 트렌디하고 편리한 경험을 추구합니다. ”"
@@ -122,9 +140,9 @@ const Introduce = () => {
                 />
             </Title>
             <Content ref={containerRef}>
-                <p>시각적으로 아름다운 디자인과,<br/>확장적이고 편리한 경험을 추구합니다.</p>
-                <p>각 프로젝트에서 중심적인 경험을 설계하고,<br/>시스템이 보여주고자 하는 것을 효율적으로 설계하기 위해<br/>항상 고민하고 이야기 해왔습니다.</p>
-                <p>쌓아온 경험을 바탕으로,<br/>프로젝트 고유의 경험을 사용자 친화적으로 확장해 나갈 것입니다.</p>
+                <p>시각적으로 아름답고,<br/>확장 가능하며 편리한 경험을 지향합니다.</p>
+                <p>각 프로젝트에서 핵심 사용자 여정을 설계하고, <br/>시스템이 전달해야 할 가치를 명확하고 <br/>효율적으로 드러내기 위해 끊임없이 고민하고 소통해 왔습니다.</p>
+                <p>이제 쌓아온 경험을 바탕으로, <br/>프로젝트 고유의 경험을 사용자 친화적으로 확장해 나가겠습니다.</p>
             </Content>
             <CardSection>
                 <CardSwap

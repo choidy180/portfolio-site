@@ -1,4 +1,6 @@
+import AOSProvider from "@/components/AOSProvider";
 import { GlobalStyle } from "@/styles/GlobalStyle";
+import 'aos/dist/aos.css';
 
 export default function RootLayout({
     children,
@@ -9,8 +11,10 @@ export default function RootLayout({
         <html lang="en">
             <title>민석킴</title>
             <body>
-                <GlobalStyle />
-                {children}
+                <AOSProvider>
+                    <GlobalStyle />
+                    {children}
+                </AOSProvider>
             </body>
         </html>
     );

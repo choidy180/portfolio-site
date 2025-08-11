@@ -1,0 +1,71 @@
+/* ===== Coverflow Gallery (full CSS) ===== */
+
+.cf-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;            /* 바깥으로 튀는 카드 잘라냄 */
+  display: grid;
+  place-items: center;
+}
+
+/* 카드들을 담는 트랙: 3D 원근만 제공하고, 실제 이동/회전은 카드에서 */
+.cf-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1400px;         /* 깊이감 (1200~1800에서 취향대로 조절) */
+  perspective-origin: 50% 50%;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+}
+.cf-track:active { cursor: grabbing; }
+
+/* 개별 카드 */
+.cf-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;        /* 중앙 기준 정렬 */
+  transform-style: preserve-3d;
+  overflow: hidden;
+
+  /* 외곽 느낌(하얀 보더 + 그림자) */
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 3px rgba(255, 255, 255, 0.92);
+  background: #0b0b0f;
+
+  border-radius: 20px;         /* TSX에서 radius 주입해도 OK, 여기 기본값 */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transition: box-shadow 0.25s ease;
+}
+
+/* 살짝 더 입체감 주고 싶으면 주석 해제
+.cf-card::before {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,0) 40%);
+  mix-blend-mode: screen;
+}
+*/
+
+.cf-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* 이미지 꽉 채우기 */
+  pointer-events: none;
+}
+
+/* 간단 반응형(옵션) */
+@media (max-width: 768px) {
+  .cf-track { perspective: 1200px; }
+  .cf-card  { box-shadow:
+               0 10px 28px rgba(0,0,0,.4),
+               inset 0 0 0 2px rgba(255,255,255,.92); }
+}

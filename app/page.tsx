@@ -2,6 +2,7 @@
 import Ballpit from '@/components/ballpit';
 import CareerColumns from '@/components/careerColumns';
 import ContentBox1 from '@/components/contentBox1';
+import ContentBox2 from '@/components/contentBox2';
 import FuzzyText from '@/components/fuzzyText';
 import Introduce from '@/components/introduce';
 import styled from 'styled-components';
@@ -13,7 +14,6 @@ const CoverWrapper = styled.div`
     /* background-image: url('/qhd_wallpaper.png'); */
     background-size: cover;
     background-position: center;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,14 +88,16 @@ export default function Cover() {
         <>
             <CoverWrapper>
                 <CenteredBox>
-                    <Ballpit
-                        count={140}
-                        gravity={0.1}
-                        friction={0.9975}
-                        wallBounce={0.95}
-                        followCursor={false}
-                        ambientColor={16777215}
-                    />
+                    <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+                        <Ballpit
+                            count={160}
+                            gravity={0.1}
+                            friction={0.9975}
+                            wallBounce={0.95}
+                            followCursor={false}
+                            ambientColor={16777215}
+                        />
+                    </div>
                     <ContentBox>
                         <FuzzyText 
                             baseIntensity={0.2} 
@@ -108,13 +110,13 @@ export default function Cover() {
                         <Name>Kim Min Seok</Name>
                         <JobTitle>Web Developer</JobTitle>
 
-                        {/* <ConfidentialStamp src="/confidential_stamp_only.png" alt="stamp" /> */}
                     </ContentBox>
                 </CenteredBox>
             </CoverWrapper>
             <Introduce/>
             <CareerColumns/>
             <ContentBox1/>
+            <ContentBox2/>
         </>
     );
 }
