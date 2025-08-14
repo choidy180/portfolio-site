@@ -1,35 +1,31 @@
 'use client';
 
-import { useEffect, useRef } from "react";
-import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
-import "./css/aurora.css";
+import { useEffect, useRef } from 'react';
+import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
+import './css/aurora.css';
 
 const VERT = `#version 300 es
 in vec2 position;
-void main() {
-  gl_Position = vec4(position, 0.0, 1.0);
-}
+void main() { gl_Position = vec4(position, 0.0, 1.0); }
 `;
 
-/** 전체 셰이더 (noise/ColorStop/COLOR_RAMP 포함) */
 const FRAG = `#version 300 es
 precision highp float;
 
 uniform float uTime;
 uniform float uAmplitude;
-uniform vec3  uColorStops[3];
+uniform vec3  uColorStop0;
+uniform vec3  uColorStop1;
+uniform vec3  uColorStop2;
 uniform vec2  uResolution;
 uniform float uBlend;
 
 out vec4 fragColor;
 
-/* --- noise utils --- */
-vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
+/* noise utils */
+vec3 permute(vec3 x){ return mod(((x * 34.0) + 1.0) * x, 289.0); }
 float snoise(vec2 v){
-  const vec4 C = vec4(
-    0.211324865405187, 0.366025403784439,
-    -0.577350269189626, 0.024390243902439
-  );
+  const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
   vec2 i  = floor(v + dot(v, C.yy));
   vec2 x0 = v - i + dot(i, C.xx);
   vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
@@ -50,7 +46,7 @@ float snoise(vec2 v){
   return 130.0 * dot(m, g);
 }
 
-/* --- color ramp --- */
+/* color ramp */
 struct ColorStop { vec3 color; float position; };
 #define COLOR_RAMP(colors, factor, outColor) { \
   int idx = 0; \
@@ -70,9 +66,9 @@ void main() {
   vec2 uv = gl_FragCoord.xy / uResolution;
 
   ColorStop colors[3];
-  colors[0] = ColorStop(uColorStops[0], 0.0);
-  colors[1] = ColorStop(uColorStops[1], 0.5);
-  colors[2] = ColorStop(uColorStops[2], 1.0);
+  colors[0] = ColorStop(uColorStop0, 0.0);
+  colors[1] = ColorStop(uColorStop1, 0.5);
+  colors[2] = ColorStop(uColorStop2, 1.0);
 
   vec3 rampColor;
   COLOR_RAMP(colors, uv.x, rampColor);
@@ -90,20 +86,6 @@ void main() {
 }
 `;
 
-/* stops(hex[]) → Float32Array(9) 로 변환 (vec3 * 3) */
-function buildStopsTyped(stops: string[]): Float32Array {
-  const safe = stops && stops.length ? stops.slice(0, 3) : ["#5227FF", "#7cff67", "#5227FF"];
-  while (safe.length < 3) safe.push(safe[safe.length - 1]);
-  const out = new Float32Array(9);
-  safe.forEach((hex, i) => {
-    const c = new Color(hex);
-    out[i * 3 + 0] = c.r;
-    out[i * 3 + 1] = c.g;
-    out[i * 3 + 2] = c.b;
-  });
-  return out;
-}
-
 interface AuroraProps {
   colorStops?: string[];  // 3개 권장
   amplitude?: number;
@@ -114,83 +96,112 @@ interface AuroraProps {
 
 export default function Aurora(props: AuroraProps) {
   const {
-    colorStops = ["#5227FF", "#7cff67", "#5227FF"],
+    colorStops = ['#5227FF', '#7cff67', '#5227FF'],
     amplitude = 1.0,
     blend = 0.5,
   } = props;
 
-  const propsRef = useRef<AuroraProps>(props);
+  const propsRef = useRef(props);
   propsRef.current = props;
 
-  const ctnDom = useRef<HTMLDivElement>(null);
+  const ctnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctn = ctnDom.current;
+    const ctn = ctnRef.current;
     if (!ctn) return;
 
+    // 1) 캔버스 만들고 Renderer에 전달 (gl 말고 canvas + webgl:2)
+    const canvasEl = document.createElement('canvas');
     const renderer = new Renderer({
+      canvas: canvasEl,
+      webgl: 2,                // ★ WebGL2 요청
       alpha: true,
       premultipliedAlpha: true,
       antialias: true,
+      powerPreference: 'high-performance',
     });
     const gl = renderer.gl;
+
+    // WebGL2 확인 (안되면 조용히 종료)
+    if (!(gl instanceof WebGL2RenderingContext)) {
+      console.error('WebGL2 not supported: Aurora shader needs WebGL2 (#version 300 es).');
+      return;
+    }
+
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    gl.canvas.style.backgroundColor = "transparent";
+    canvasEl.style.backgroundColor = 'transparent';
+    ctn.appendChild(canvasEl);
 
-    const geometry = new Triangle(gl);
+    const geometry = new Triangle(gl as any);
 
-    // ★ vec3[3] → Float32Array(9)
-    const colorStopsArray = buildStopsTyped(colorStops);
+    const toVec3 = (hex: string) => {
+      const c = new Color(hex);
+      return [c.r, c.g, c.b] as [number, number, number];
+    };
+    const [s0, s1, s2] = (props.colorStops ?? colorStops).slice(0, 3);
+    const col0 = toVec3(s0 || colorStops[0]);
+    const col1 = toVec3(s1 || colorStops[1]);
+    const col2 = toVec3(s2 || colorStops[2]);
 
-    const program = new Program(gl, {
+    const program = new Program(gl as any, {
       vertex: VERT,
       fragment: FRAG,
       uniforms: {
-        uTime: { value: 0 },
-        uAmplitude: { value: amplitude },
-        uColorStops: { value: colorStopsArray }, // ← TypedArray
-        uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] as [number, number] },
-        uBlend: { value: blend },
+        uTime:        { value: 0 },
+        uAmplitude:   { value: amplitude },
+        uBlend:       { value: blend },
+        uResolution:  { value: [ctn.clientWidth, ctn.clientHeight] as [number, number] },
+        uColorStop0:  { value: col0 },
+        uColorStop1:  { value: col1 },
+        uColorStop2:  { value: col2 },
       },
     });
 
-    const mesh = new Mesh(gl, { geometry, program });
-    ctn.appendChild(gl.canvas);
+    const mesh = new Mesh(gl as any, { geometry, program });
 
     const resize = () => {
-      const width = ctn.offsetWidth;
-      const height = ctn.offsetHeight;
-      renderer.setSize(width, height);
-      program.uniforms.uResolution.value = [width, height] as [number, number];
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.floor(ctn.clientWidth * dpr));
+      const h = Math.max(1, Math.floor(ctn.clientHeight * dpr));
+      renderer.setSize(w, h);
+      program.uniforms.uResolution.value = [w, h] as [number, number];
+      canvasEl.style.width = '100%';
+      canvasEl.style.height = '100%';
     };
-    window.addEventListener("resize", resize);
+    window.addEventListener('resize', resize);
     resize();
 
     let raf = 0;
-    const update = (t: number) => {
-      raf = requestAnimationFrame(update);
-      const { time = t * 0.01, speed = 1.0 } = propsRef.current;
+    const loop = (t: number) => {
+      raf = requestAnimationFrame(loop);
 
-      program.uniforms.uTime.value = time * speed * 0.1;
-      program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
-      program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+      const { time, speed = 1.0, amplitude: amp = amplitude, blend: bl = blend } = propsRef.current;
+      program.uniforms.uTime.value = (time ?? t * 0.001) * speed * 0.5;
+      program.uniforms.uAmplitude.value = amp;
+      program.uniforms.uBlend.value = bl;
 
+      // 색상 업데이트
       const stops = propsRef.current.colorStops ?? colorStops;
-      program.uniforms.uColorStops.value = buildStopsTyped(stops); // ← TypedArray로 갱신
+      const a = toVec3(stops[0] || colorStops[0]);
+      const b = toVec3(stops[1] || colorStops[1]);
+      const c = toVec3(stops[2] || colorStops[2]);
+      program.uniforms.uColorStop0.value = a;
+      program.uniforms.uColorStop1.value = b;
+      program.uniforms.uColorStop2.value = c;
 
       renderer.render({ scene: mesh });
     };
-    raf = requestAnimationFrame(update);
+    raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-      if (gl.canvas.parentNode === ctn) ctn.removeChild(gl.canvas);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      window.removeEventListener('resize', resize);
+      if (canvasEl.parentNode === ctn) ctn.removeChild(canvasEl);
+      (gl as any).getExtension?.('WEBGL_lose_context')?.loseContext?.();
     };
   }, [amplitude, blend, colorStops]);
 
-  return <div ref={ctnDom} className="aurora-container" />;
+  return <div ref={ctnRef} className="aurora-container" />;
 }

@@ -2,10 +2,11 @@
 import styled from "styled-components";
 import GlassPanel from "./glassPanel";
 import CoverflowGallery from "./rolling-gallery";
-import { SiNodedotjs, SiPython, SiStackoverflow } from "react-icons/si";
+import { SiNextdotjs, SiNodedotjs, SiPython, SiStackoverflow, SiStyledcomponents, SiTailwindcss } from "react-icons/si";
 import { RiExternalLinkFill } from "react-icons/ri";
 import Orb from "./orb";
-import Silk from "./silk";
+import { FaDatabase } from "react-icons/fa";
+import Iridescence from "./Iridescence";
 
 const Container = styled.div`
   position: relative;
@@ -63,9 +64,9 @@ const ImageBox = styled.div`
 `;
 
 const IMGS: string[] = [
-  "/buff2.jpg",
-  "/buff1.jpg",
-  "/buff3.jpg",
+  "/ip2.jpg",
+  "/ip.jpg",
+  "/ip3.jpg",
 ];
 
 const FinalBox = styled.div`
@@ -86,7 +87,7 @@ const IconBox = styled.div`
   justify-content: start;
   align-items: center;
   gap: 10px;
-  background-color: #FC8500;
+  background-color: white;
   padding: 8px;
   border-radius: 8px;
 `
@@ -109,8 +110,8 @@ const Icon = styled.ul`
 
 const VisitButton = styled.div`
   padding: 8px 20px;
-  background-color: #FC8500;
-  color: #FFFFFF;
+  background-color: white;
+  color: black;
   font-weight: 600;
   border-radius: 12px;
   height: 50px;
@@ -130,26 +131,19 @@ const VisitButton = styled.div`
 
 `
 
-export default function ContentBox2() {
+export default function ContentBox3() {
   return (
     <Container>
-      {/* <Orb
-        hoverIntensity={0.5}
-        rotateOnHover={true}
-        hue={254}
-        forceHoverState={false}
-      /> */}
-      <Silk
-        speed={5}
-        scale={1}
-        color="#d59c20"
-        noiseIntensity={1.5}
-        rotation={0}
+      <Iridescence
+        color={[0.25, 0.32, 0.45]}
+        mouseReact={false}
+        amplitude={0.1}
+        speed={1.0}
       />
       <Wrapper>
         <TopLine>
           <GlassPanel width={500} padding={24} radius={24} blur={10} alpha={0.0001} elevation={1} borderAlpha={1} textColor="#fff" style={{ textAlign: 'center' }}>
-            <h2>하이버프 재테크 (2020-2021)</h2>
+            <h2>IP Studio {'(2024~2025)'}</h2>
           </GlassPanel>
           <GlassPanel width={700} padding={24} radius={24} blur={10} alpha={0.0001} elevation={1} borderAlpha={1} textColor="#fff" style={{ textAlign: 'center' }}>
             <h2>클라이언트 및 시스템 개발</h2>
@@ -167,34 +161,35 @@ export default function ContentBox2() {
             />
           </ImageBox>
 
-          <GlassPanel width={1224} height={300} padding={24} radius={24} blur={14} alpha={0.0001} elevation={1} borderAlpha={1} textColor="#fff" style={{ textAlign: 'left' }}>
-            <p>
-              하이버프 AI는 금융 빅데이터를 수집 및 분석하고, CRNN 알고리즘을 활용하여 시세 변동성을 예측한 뒤 예측 그래프를 생성합니다. 또한 실시간으로 시세를 모니터링하여 예측과 다른 상황이 발생하면 리밸런싱을 통해 이익을 실현하고 예측 실패 시 투자 패턴을 개선합니다. 이 AI는 투자의 모든 과정을 대신하여 인간의 실수를 줄이고 시간적, 정신적 스트레스를 없애줍니다.
-            </p>
-            <p>금융 빅데이터 수집·분석부터 CRNN 기반 변동성 예측·시각화, 실시간 리밸런싱등 여러 시스템개발과 클라이언트 UI,UX 개발에 참여하였고, 투자자의 실수와 스트레스를 줄이는 경험을 구현했습니다.</p>
+          <GlassPanel width={1224} height={190} padding={24} radius={24} blur={14} alpha={0.0001} elevation={1} borderAlpha={1} textColor="#fff" style={{ textAlign: 'left' }}>
+            <p>IP Studio는 웹소설, 웹툰, 영화·드라마 대본, 미술·디자인 등 다양한 창작물의 계약·발행 과정을 한곳에서 시각적으로 관리할 수 있는 플랫폼입니다. 창작자는 자신의 IP를 체계적으로 기록·발행하고, 기업·투자자와의 비즈니스 기회를 쉽게 연결할 수 있습니다. 이를 통해 창작물의 저작권 보호와 유통, 사업 확장을 효율적으로 지원하며, 콘텐츠 IP의 가치와 활용도를 극대화합니다.</p>
           </GlassPanel>
         </BottomLine>
         <FinalBox>
           <IconBox>
             <Icon>
-              <SiPython color="#3776AB" size={16} />
-              <span>PYTHON</span>
+                <SiNextdotjs color="#000000" size={16} />
+                <span>NEXT.JS</span>
             </Icon>
 
-            {/* Node.js */}
+            {/* styled-components */}
             <Icon>
-              <SiNodedotjs color="#339933" size={16} />
-              <span>NODE.JS</span>
+                <SiStyledcomponents color="#DB7093" size={16} />
+                <span>STYLED-COMPONENTS</span>
             </Icon>
 
-            {/* Stack Overflow */}
+            {/* Zustand */}
             <Icon>
-              <SiStackoverflow color="#F48024" size={16} />
-              <span>STACK OVERFLOW</span>
+                <FaDatabase color="#FFCC00" size={16} />
+                <span>ZUSTAND</span>
+            </Icon>
+            <Icon>
+                <SiTailwindcss color="#06B6D4" size={16} />
+                <span>TAILWIND CSS</span>
             </Icon>
 
           </IconBox>
-          <VisitButton onClick={()=> window.open(`https://highbuff.com/person/`)}>
+          <VisitButton onClick={()=> window.open(`https://ipstudio.storicha.in/intro`)}>
             <span>자세히 보기</span> <RiExternalLinkFill />
           </VisitButton>
         </FinalBox>

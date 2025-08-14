@@ -3,9 +3,12 @@ import Ballpit from '@/components/ballpit';
 import CareerColumns from '@/components/careerColumns';
 import ContentBox1 from '@/components/contentBox1';
 import ContentBox2 from '@/components/contentBox2';
+import ContentBox3 from '@/components/contentBox3';
 import FuzzyText from '@/components/fuzzyText';
 import Introduce from '@/components/introduce';
 import styled from 'styled-components';
+import GlobalStyle, { Section, SnapContainer } from './GlobalStyle';
+import ContentBox4 from '@/components/contentBox4';
 
 const CoverWrapper = styled.div`
     width: 100vw;
@@ -73,50 +76,48 @@ const JobTitle = styled.div`
     margin-top: 0.4rem;
 `;
 
-// const ConfidentialStamp = styled.img`
-//     position: absolute;
-//     bottom: 8%;
-//     right: 5%;
-//     width: 150px;
-//     min-width: 10vw;
-//     transform: rotate(-10deg);
-//     opacity: 0.85;
-// `;
 
 export default function Cover() {
     return (
         <>
-            <CoverWrapper>
-                <CenteredBox>
-                    <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
-                        <Ballpit
-                            count={160}
-                            gravity={0.1}
-                            friction={0.9975}
-                            wallBounce={0.95}
-                            followCursor={false}
-                            ambientColor={16777215}
-                        />
-                    </div>
-                    <ContentBox>
-                        <FuzzyText 
-                            baseIntensity={0.2} 
-                            hoverIntensity={0.5} 
-                            enableHover={false}
-                        >
-                            Portfolio 
-                        </FuzzyText>
-                        <Year>2025</Year>
-                        <Name>Kim Min Seok</Name>
-                        <JobTitle>Web Developer</JobTitle>
+            <GlobalStyle/>
+                <SnapContainer>
+                    <Section>
+                        <CoverWrapper>
+                            <CenteredBox>
+                                <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+                                    <Ballpit
+                                        count={160}
+                                        gravity={0.1}
+                                        friction={0.9975}
+                                        wallBounce={0.95}
+                                        followCursor={false}
+                                        ambientColor={16777215}
+                                    />
+                                </div>
+                                <ContentBox>
+                                    <FuzzyText 
+                                        baseIntensity={0.2} 
+                                        hoverIntensity={0.5} 
+                                        enableHover={false}
+                                    >
+                                        Portfolio 
+                                    </FuzzyText>
+                                    <Year>2025</Year>
+                                    <Name>Kim Min Seok</Name>
+                                    <JobTitle>Web Developer</JobTitle>
 
-                    </ContentBox>
-                </CenteredBox>
-            </CoverWrapper>
-            <Introduce/>
-            <CareerColumns/>
-            <ContentBox1/>
-            <ContentBox2/>
+                                </ContentBox>
+                            </CenteredBox>
+                        </CoverWrapper>
+                    </Section>
+                    <Section><Introduce /></Section>
+                    <Section><CareerColumns /></Section>
+                    <Section><ContentBox1 /></Section>
+                    <Section><ContentBox2 /></Section>
+                    <Section><ContentBox4 /></Section>
+                    <Section><ContentBox3 /></Section>
+            </SnapContainer>
         </>
     );
 }

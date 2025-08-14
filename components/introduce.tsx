@@ -55,10 +55,10 @@ const Content = styled.div`
     gap: 40px;
     font-family: 'Paperlogy-4Regular';
 
-    box-sizing: border-box; /* ✅ 패딩/보더 포함 */
-    margin-top: 6vh;        /* 100px 고정 대신 뷰포트 기준 */
-    /* 긴 단어로 인한 가로 스크롤 예방 */
+    box-sizing: border-box;
+    margin-top: 6vh;
     overflow-wrap: anywhere;
+    background-color: #141414;
 
     p {
         font-size: 1.4rem;
@@ -111,7 +111,7 @@ const Introduce = () => {
         <Container>
             <BgBox>
                 <Aurora
-                    colorStops={["#ff3cac", "#784ba0", "#2b86c5"]}
+                    colorStops={["#6C4BF4", "#1A1A1A", "#FF5E5B"]}
                     blend={0.5}
                     amplitude={1.0}
                     speed={0.5}

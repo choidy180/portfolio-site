@@ -5,12 +5,15 @@ import GlassPanel from "./glassPanel";
 import CoverflowGallery from "./rolling-gallery";
 import { SiLinux, SiReact, SiStackoverflow, SiStyledcomponents } from "react-icons/si";
 import { RiExternalLinkFill } from "react-icons/ri";
+import GridDistortion from "./distortion";
+import ImageBg from '@/public/splash-image.jpg'
+import { useState } from "react";
 
 const Container = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: #000;
+  /* background-color: #000; */
 `;
 
 const Wrapper = styled.div`
@@ -35,6 +38,7 @@ const TopLine = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
 `;
 
 const BottomLine = styled.div`
@@ -47,7 +51,7 @@ const BottomLine = styled.div`
   gap: 14px;
 
   img { object-fit: cover; border-radius: 24px; }
-  p  { font-size: 1.2rem; }
+  p  { font-size: 1.2rem; user-select: none; }
 `;
 
 const ImageBox = styled.div`
@@ -100,6 +104,7 @@ const Icon = styled.ul`
     align-items: center;
     gap: 8.5px;
     color: #FFFFFF;
+    user-select: none;
     svg {
         transform: scale(1.2);
     }
@@ -126,13 +131,84 @@ const VisitButton = styled.div`
   svg {
     transform: scale(1.2);
   }
-
 `
 
+const GridBox = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+`
+
+const RightBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`
+
+const Button = styled.button`
+    padding: 10px 20px !important;
+    font-size: 16px;
+    background: #6366F1;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+`;
+
+const ModalOverlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ModalBox = styled.div`
+    background: white;
+    padding: 0 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    max-height: calc(100vh - 40px);
+    text-align: center;
+`;
+
+const CloseButton = styled.button`
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+`;
+
 export default function ContentBox1() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <Container>
-      <DarkVeil />
+      <GridBox>
+      {/* <DarkVeil /> */}
+        <GridDistortion
+          imageSrc={ImageBg}
+          grid={10}
+          mouse={0.25}
+          strength={0.15}
+          relaxation={0.9}
+          className="custom-class"
+        />
+      </GridBox>
       <Wrapper>
         <TopLine>
           <GlassPanel width={500} padding={24} radius={24} blur={4} alpha={0.0001} elevation={1} borderAlpha={1} textColor="#fff" style={{ textAlign: 'center' }}>
@@ -183,11 +259,25 @@ export default function ContentBox1() {
               <span>STYLED-COMPONENTS</span>
             </Icon>
           </IconBox>
-          <VisitButton onClick={()=> window.open(`https://interview.highbuff.com/`)}>
-            <span>자세히 보기</span> <RiExternalLinkFill />
-          </VisitButton>
+          <RightBox>
+            <VisitButton onClick={() => setIsOpen(true)}>
+              <span>READ ME</span> <RiExternalLinkFill />
+            </VisitButton>
+            <VisitButton onClick={()=> window.open(`https://interview.highbuff.com/`)}>
+              <span>자세히 보기</span> <RiExternalLinkFill />
+            </VisitButton>
+          </RightBox>
         </FinalBox>
       </Wrapper>
+      {isOpen && (
+        <ModalOverlay onClick={() => setIsOpen(false)}>
+            <ModalBox onClick={(e) => e.stopPropagation()}>
+                <CloseButton onClick={() => setIsOpen(false)}>닫기</CloseButton>
+                <h2>모달 제목</h2>
+                <p>여기에 내용이 들어갑니다.</p>
+            </ModalBox>
+        </ModalOverlay>
+      )}
     </Container>
   );
 }

@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    compiler: {
-        styledComponents: true,
-    },
+    compiler: { styledComponents: true }, // SWC 트랜스폼 활성화
+    reactStrictMode: true,
     eslint: {
         // 빌드 중 ESLint를 완전히 건너뜀
         ignoreDuringBuilds: true,
