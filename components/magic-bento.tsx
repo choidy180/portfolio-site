@@ -35,7 +35,7 @@ const cardData: BentoCardProps[] = [
     color: "#060010",
     title: "Analytics",
     description: "Track user behavior",
-    label: "Insights",
+    label: "Next.JS",
   },
   {
     color: "#060010",
