@@ -1,21 +1,6 @@
-'use client';
+import { useEffect, useMemo, useRef, useState } from "react";
+import styled from "styled-components";
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import styled from 'styled-components';
-import data from '@/json/projects.json'; // 로컬 JSON 직접 import
-import TextType from '@/components/textType';
-
-/**
- * Projects Page (with Search + Infinite Scroll)
- * - Next.js (App Router) client component
- * - styled-components, tab-size: 2
- * - Title + search bar on top
- * - Category list (sidebar) to filter
- * - Card grid; click opens modal
- * - Data imported directly from local JSON file
- */
-
-// ========= Types =========
 export type Project = {
   id: string;
   title: string;
@@ -25,31 +10,50 @@ export type Project = {
   link?: string;
 };
 
-export default function ProjectsPage() {
-  // Raw data (local import)
-  const [allProjects] = useState<Project[]>(data.projects as Project[]);
+export default function SubPage() {
+  // Raw data
+  const [allProjects, setAllProjects] = useState<Project[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   // UI state
   const [selectedCat, setSelectedCat] = useState<string>('All');
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
 
-  // Debounce query
+  // Debounce query (200ms)
   useEffect(() => {
     const t = setTimeout(() => setDebouncedQuery(query.trim().toLowerCase()), 200);
     return () => clearTimeout(t);
   }, [query]);
 
-  // Build categories
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        // 프로젝트 불러오기
+        const res = await fetch('@/json/projects.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = (await res.json()) as { projects: Project[] };
+        if (!cancelled) setAllProjects(data.projects || []);
+      } catch (e: any) {
+        if (!cancelled) setError(e?.message || 'Failed to load projects');
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  // Build categories from all projects
   const categories = useMemo(() => {
+    if (!allProjects) return [] as Array<[string, number]>;
     const map = new Map<string, number>();
     for (const p of allProjects) map.set(p.category, (map.get(p.category) || 0) + 1);
     return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
   }, [allProjects]);
 
-  // Filtered list
+  // Filtered list by category + debounced query
   const filtered = useMemo(() => {
-    const byCat = selectedCat === 'All' ? allProjects : allProjects.filter(p => p.category === selectedCat);
+    const base = allProjects || [];
+    const byCat = selectedCat === 'All' ? base : base.filter(p => p.category === selectedCat);
     if (!debouncedQuery) return byCat;
     return byCat.filter(p => {
       const hay = [p.title, p.description, p.category, ...(p.tags || [])].join(' ').toLowerCase();
@@ -62,17 +66,20 @@ export default function ProjectsPage() {
   const [page, setPage] = useState(1);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
+  // Reset page when filters change
   useEffect(() => { setPage(1); }, [selectedCat, debouncedQuery]);
 
   const visible = useMemo(() => filtered.slice(0, PAGE_SIZE * page), [filtered, page]);
   const hasMore = visible.length < filtered.length;
 
+  // Observe sentinel to load more
   useEffect(() => {
-    if (!hasMore) return;
+    if (!hasMore) return; // nothing to load
     const el = sentinelRef.current;
     if (!el) return;
     const io = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) setPage(p => p + 1);
+      const [entry] = entries;
+      if (entry.isIntersecting) setPage(p => p + 1);
     }, { rootMargin: '800px 0px' });
     io.observe(el);
     return () => io.disconnect();
@@ -81,6 +88,7 @@ export default function ProjectsPage() {
   // Modal state
   const [active, setActive] = useState<Project | null>(null);
 
+  // ESC to close modal
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActive(null); };
     window.addEventListener('keydown', onKey);
@@ -90,16 +98,8 @@ export default function ProjectsPage() {
   return (
     <PageRoot>
       <Header>
-        <Title>
-          <TextType 
-            text={["Thank you for coming :)"]}
-            typingSpeed={75}
-            pauseDuration={1500}
-            showCursor={true}
-            cursorCharacter="|"
-          />
-        </Title>
-        <Sub>프로젝트를 검색하거나, 클릭하여 상세 정보를 확인하세요.</Sub>
+        <Title>Projects</Title>
+        <Sub>검색/카테고리로 필터링하고, 카드를 클릭해 상세 모달을 확인하세요.</Sub>
         <SearchBar>
           <SearchInput
             type="search"
@@ -121,7 +121,7 @@ export default function ProjectsPage() {
                 onClick={() => setSelectedCat('All')}
                 aria-pressed={selectedCat === 'All'}
               >
-                All <Count>{allProjects.length}</Count>
+                All <Count>{allProjects?.length ?? 0}</Count>
               </CatButton>
             </CatItem>
             {categories.map(([name, count]) => (
@@ -140,28 +140,41 @@ export default function ProjectsPage() {
         </Sidebar>
 
         <Content>
-          <Grid role="list" aria-label="project list">
-            {visible.map((p) => (
-              <Card key={p.id} role="listitem">
-                <CardBody onClick={() => setActive(p)} tabIndex={0} onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(p); }
-                }}>
-                  <CardTitle>{p.title}</CardTitle>
-                  <CardDesc>{p.description}</CardDesc>
-                  {p.tags && p.tags.length > 0 && (
-                    <TagRow>
-                      {p.tags.map((t, i) => (<Tag key={t + i}>#{t}</Tag>))}
-                    </TagRow>
-                  )}
-                </CardBody>
-              </Card>
-            ))}
-          </Grid>
+          {error && <ErrorBox>데이터 로드 실패: {error}</ErrorBox>}
 
-          <Sentinel ref={sentinelRef} aria-hidden="true" />
+          {!allProjects && !error && (
+            <SkeletonGrid>
+              {Array.from({ length: 9 }).map((_, i) => (<SkeletonCard key={i} />))}
+            </SkeletonGrid>
+          )}
 
-          {filtered.length === 0 && (
-            <Empty>검색어/카테고리에 해당하는 프로젝트가 없습니다.</Empty>
+          {allProjects && (
+            <>
+              <Grid role="list" aria-label="project list">
+                {visible.map((p) => (
+                  <Card key={p.id} role="listitem">
+                    <CardBody onClick={() => setActive(p)} tabIndex={0} onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(p); }
+                    }}>
+                      <CardTitle>{p.title}</CardTitle>
+                      <CardDesc>{p.description}</CardDesc>
+                      {p.tags && p.tags.length > 0 && (
+                        <TagRow>
+                          {p.tags.map((t, i) => (<Tag key={t + i}>#{t}</Tag>))}
+                        </TagRow>
+                      )}
+                    </CardBody>
+                  </Card>
+                ))}
+              </Grid>
+
+              {/* Sentinel for infinite scroll */}
+              <Sentinel ref={sentinelRef} aria-hidden="true" />
+
+              {filtered.length === 0 && (
+                <Empty>검색어/카테고리에 해당하는 프로젝트가 없습니다.</Empty>
+              )}
+            </>
           )}
         </Content>
       </Layout>
@@ -217,7 +230,6 @@ function Modal(
   );
 }
 
-
 // ========= styled (tab-size: 2) =========
 const PageRoot = styled.main`
   tab-size: 2;
@@ -237,35 +249,16 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-  width: 100%;
-  text-align: center;
   margin: 0;
-  font-size: 2rem;
+  font-size: 28px;
   line-height: 1.2;
   color: #ffffff;
-  height: 3rem;
-  overflow-y: hidden !important;
-  font-family: 'GongGothicMedium';
-
-  div {
-    overflow-y: hidden;
-  }
-  h1 {
-    overflow-y: hidden !important;
-  }
-  span {
-    overflow-y: hidden;
-  }
 `;
 
 const Sub = styled.p`
-  width: 100%;
-  text-align: center;
-  font-family: 'GongGothicMedium';
   margin: 0;
-  margin-top: 1rem;
-  font-size: 1.4rem;
-  color: #ededed;
+  font-size: 14px;
+  color: #9ca3af;
 `;
 
 const SearchBar = styled.div`

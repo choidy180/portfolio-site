@@ -1,0 +1,204 @@
+{
+  "projects": [
+    {
+      "id": "p1",
+      "title": "Portfolio Site",
+      "description": "Next.js + styled-components 기반 포트폴리오. Server Actions로 문의폼 처리.",
+      "category": "Web",
+      "tags": ["Next.js", "styled-components", "SEO"],
+      "link": "#"
+    },
+    {
+      "id": "p2",
+      "title": "TMDB Movie Explorer",
+      "description": "TMDB API를 사용한 한국 영화/드라마 탐색, 다국어 지원.",
+      "category": "Web",
+      "tags": ["TMDB", "React", "API"],
+      "link": "#"
+    },
+    {
+      "id": "p3",
+      "title": "Auth Starter",
+      "description": "Firebase Auth 기반 이메일/비밀번호 로그인 스타터 템플릿.",
+      "category": "Web",
+      "tags": ["Firebase", "Auth", "Next.js"],
+      "link": "#"
+    },
+    {
+      "id": "p4",
+      "title": "Sales Dashboard",
+      "description": "매출 지표 시각화 대시보드. 캐시/스트리밍으로 TTFB 최적화.",
+      "category": "Data",
+      "tags": ["Charts", "Edge", "RSC"],
+      "link": "#"
+    },
+    {
+      "id": "p5",
+      "title": "Pokemon Viewer",
+      "description": "포켓몬 목록/상세 클라이언트. Hydration mismatch 방지 패턴 적용.",
+      "category": "Web",
+      "tags": ["CSR", "SWR"],
+      "link": "#"
+    },
+    {
+      "id": "p6",
+      "title": "VR Scene Prototype",
+      "description": "Three.js/React-Three-Fiber로 인터랙티브 씬 프로토타입.",
+      "category": "Experiment",
+      "tags": ["three.js", "R3F"],
+      "link": "#"
+    },
+    {
+      "id": "p7",
+      "title": "Dummy 7",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p8",
+      "title": "Dummy 8",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p9",
+      "title": "Dummy 9",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p10",
+      "title": "Dummy 10",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p11",
+      "title": "Dummy 11",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data"
+    },
+    {
+      "id": "p12",
+      "title": "Dummy 12",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment"
+    },
+    {
+      "id": "p13",
+      "title": "Dummy 13",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web"
+    },
+    {
+      "id": "p14",
+      "title": "Dummy 14",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data"
+    },
+    {
+      "id": "p15",
+      "title": "Dummy 15",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment"
+    },
+    {
+      "id": "p16",
+      "title": "Dummy 16",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p17",
+      "title": "Dummy 17",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p18",
+      "title": "Dummy 18",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p19",
+      "title": "Dummy 19",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web",
+      "tags": ["Demo"]
+    },
+    {
+      "id": "p20",
+      "title": "Dummy 20",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data"
+    },
+    {
+      "id": "p21",
+      "title": "Dummy 21",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment"
+    },
+    {
+      "id": "p22",
+      "title": "Dummy 22",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web"
+    },
+    {
+      "id": "p23",
+      "title": "Dummy 23",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data"
+    },
+    {
+      "id": "p24",
+      "title": "Dummy 24",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment"
+    },
+    {
+      "id": "p25",
+      "title": "Dummy 25",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web"
+    },
+    {
+      "id": "p26",
+      "title": "Dummy 26",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data"
+    },
+    {
+      "id": "p27",
+      "title": "Dummy 27",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment"
+    },
+    {
+      "id": "p28",
+      "title": "Dummy 28",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Web"
+    },
+    {
+      "id": "p29",
+      "title": "Dummy 29",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Data"
+    },
+    {
+      "id": "p30",
+      "title": "Dummy 30",
+      "description": "무한 스크롤 테스트용 더미 카드.",
+      "category": "Experiment"
+    }
+  ]
+}
