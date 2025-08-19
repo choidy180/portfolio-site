@@ -103,7 +103,7 @@ export default function ProjectsPage() {
         <SearchBar>
           <SearchInput
             type="search"
-            placeholder="Search title, description, tags..."
+            placeholder="프로젝트의 이름또는 설명, 태그를 검색해보세요"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             aria-label="Search projects"
@@ -121,7 +121,7 @@ export default function ProjectsPage() {
                 onClick={() => setSelectedCat('All')}
                 aria-pressed={selectedCat === 'All'}
               >
-                All <Count>{allProjects.length}</Count>
+                All <Count>&nbsp;&nbsp;&nbsp;{allProjects.length}</Count>
               </CatButton>
             </CatItem>
             {categories.map(([name, count]) => (
@@ -275,14 +275,13 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   width: 100%;
   padding: 12px 14px;
-  background: #0f172a;
+  background: #111827;
   color: #e5e7eb;
   border: 1px solid #1f2937;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 1rem;
   outline: none;
-  &:focus { border-color: #22d3ee; box-shadow: 0 0 0 2px rgba(34,211,238,.15); }
-  &::placeholder { color: #6b7280; }
+  &::placeholder { color: #aeaeae; }
 `;
 
 const Layout = styled.div`
@@ -321,7 +320,7 @@ const CatButton = styled.button<{ $active?: boolean }>`
   border: 1px solid ${({ $active }) => ($active ? '#22d3ee' : '#1f2937')};
   background: ${({ $active }) => ($active ? 'rgba(34,211,238,0.08)' : '#111827')};
   color: ${({ $active }) => ($active ? '#e6fbff' : '#d1d5db')};
-  font-size: 14px;
+  font-size: 1rem;
   cursor: pointer;
   transition: border-color .2s ease, background .2s ease, transform .06s ease;
   &:hover { border-color: #374151; }
@@ -344,14 +343,14 @@ const Grid = styled.div`
 `;
 
 const Card = styled.article`
-  background: #0f172a;
+  background: #1f2937;
   border: 1px solid #1f2937;
   border-radius: 14px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   width: calc(33.3333% - 9.5px);
-  height: 150px;
+  height: 160px;
 `;
 
 const CardBody = styled.button`
@@ -362,33 +361,36 @@ const CardBody = styled.button`
   padding: 16px 16px 12px;
   color: inherit;
   cursor: pointer;
+  font-family: 'Paperlogy-4Regular';
 `;
 
 const CardTitle = styled.h3`
   margin: 0 0 6px;
-  font-size: 16px;
+  font-size: 1.2rem;
   color: #ffffff;
 `;
 
 const CardDesc = styled.p`
   margin: 0 0 10px;
-  font-size: 13px;
-  color: #9ca3af;
+  font-size: 1rem;
+  color: #d4d4d4;
+  line-height: 1.4rem;
 `;
 
 const TagRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: 20px;
 `;
 
 const Tag = styled.span`
-  font-size: 12px;
+  font-size: .8rem;
   padding: 4px 8px;
   border-radius: 999px;
   background: #111827;
   border: 1px solid #1f2937;
-  color: #cbd5e1;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
