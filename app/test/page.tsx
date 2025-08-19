@@ -132,7 +132,7 @@ export default function ProjectsPage() {
                   onClick={() => setSelectedCat(name)}
                   aria-pressed={selectedCat === name}
                 >
-                  {name} <Count>{count}</Count>
+                  {name} <Count>&nbsp;&nbsp;&nbsp;{count}</Count>
                 </CatButton>
               </CatItem>
             ))}
@@ -288,11 +288,10 @@ const SearchInput = styled.input`
 const Layout = styled.div`
   max-width: 1160px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 16px;
-
-  @media (max-width: 880px) { grid-template-columns: 1fr; }
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 `;
 
 const Sidebar = styled.aside`
@@ -303,10 +302,12 @@ const Sidebar = styled.aside`
 
 const CatList = styled.ul`
   list-style: none;
+  width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   gap: 8px;
 `;
 
@@ -324,7 +325,6 @@ const CatButton = styled.button<{ $active?: boolean }>`
   cursor: pointer;
   transition: border-color .2s ease, background .2s ease, transform .06s ease;
   &:hover { border-color: #374151; }
-  &:active { transform: translateY(1px); }
 `;
 
 const Count = styled.span`
@@ -335,11 +335,12 @@ const Count = styled.span`
 const Content = styled.section``;
 
 const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  @media (max-width: 1024px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  @media (max-width: 560px) { grid-template-columns: 1fr; }
+  gap: 14px;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: start;
 `;
 
 const Card = styled.article`
@@ -349,6 +350,8 @@ const Card = styled.article`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: calc(33.3333% - 9.5px);
+  height: 150px;
 `;
 
 const CardBody = styled.button`
@@ -359,7 +362,6 @@ const CardBody = styled.button`
   padding: 16px 16px 12px;
   color: inherit;
   cursor: pointer;
-  &:focus { outline: 2px solid #22d3ee; outline-offset: -2px; }
 `;
 
 const CardTitle = styled.h3`
@@ -387,6 +389,10 @@ const Tag = styled.span`
   background: #111827;
   border: 1px solid #1f2937;
   color: #cbd5e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
 `;
 
 // Skeletons while loading
