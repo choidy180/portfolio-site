@@ -1,204 +1,154 @@
 {
   "projects": [
     {
-      "id": "p1",
-      "title": "Portfolio Site",
-      "description": "Next.js + styled-components 기반 포트폴리오. Server Actions로 문의폼 처리.",
+      "id": "1036335472",
+      "title": "NEXT포켓몬",
+      "working": "2025.08",
+      "img": "https://raw.githubusercontent.com/choidy180/poke-next/main/public/poke-logo.jpg",
+      "description": "Next.js + TypeScript 기반의 인터랙티브 포켓몬 도감.",
+      "category": "Web",
+      "tags": ["Next.js", "styled-components", "SEO"],
+      "link": "https://poke-next-amber.vercel.app"
+    },
+    {
+      "id": "994912091",
+      "title": "스포티파이 플레이리스트",
+      "working": "2025.07",
+      "img": "https://raw.githubusercontent.com/choidy180/next_music/main/public/spo-logo.jpg",
+      "description": "Next.js + styled-components로 만든 개인용 스포티파이 플레이리스트 관리 프로젝트",
       "category": "Web",
       "tags": ["Next.js", "styled-components", "SEO"],
       "link": "#"
     },
     {
-      "id": "p2",
-      "title": "TMDB Movie Explorer",
-      "description": "TMDB API를 사용한 한국 영화/드라마 탐색, 다국어 지원.",
+      "id": "1008661698",
+      "title": "TMDB 박스오피스",
+      "working": "2025.07",
+      "img": "https://raw.githubusercontent.com/choidy180/next-molvie-v15/main/public/next-movie.jpg",
+      "description": "Next.js + styled-components 기반, TMDB API 이용하여 박스오피스 순위 불러오는 프로젝트",
       "category": "Web",
-      "tags": ["TMDB", "React", "API"],
+      "tags": ["Next.js", "styled-components", "SEO"],
       "link": "#"
     },
     {
-      "id": "p3",
-      "title": "Auth Starter",
-      "description": "Firebase Auth 기반 이메일/비밀번호 로그인 스타터 템플릿.",
+      "id": "914358369",
+      "title": "저작권없는 BGM",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/none-copyright-bgm/main/public/none-copy.jpg",
+      "description": "Next.js + TypeScript 저작권없는 BGM 웹사이트",
       "category": "Web",
-      "tags": ["Firebase", "Auth", "Next.js"],
+      "tags": ["Next.js", "styled-components", "SEO"],
+      "link": "https://none-copyright-bgm.vercel.app"
+    },
+    {
+      "id": "289918118",
+      "title": "WEATHER OUTFIT",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/2020_07_DongseoAI/master/public/weather-outfit.jpg",
+      "description": "NodeJS 기반의 날씨기반 의상추천 웹서비스",
+      "category": "Web",
+      "tags": ["Node.JS", "MySQL"],
       "link": "#"
     },
     {
-      "id": "p4",
-      "title": "Sales Dashboard",
-      "description": "매출 지표 시각화 대시보드. 캐시/스트리밍으로 TTFB 최적화.",
-      "category": "Data",
-      "tags": ["Charts", "Edge", "RSC"],
+      "id": "324815810",
+      "title": "프라이빗 북마켓",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/2020_10_nodejs_private_project_bookmarket/main/public/private-book.jpg",
+      "description": "NodeJS 기반의 프라이빗 북마켓 웹서비스",
+      "category": "Web",
+      "tags": ["Node.JS", "MySQL"],
       "link": "#"
     },
     {
-      "id": "p5",
-      "title": "Pokemon Viewer",
-      "description": "포켓몬 목록/상세 클라이언트. Hydration mismatch 방지 패턴 적용.",
+      "id": "324817627",
+      "title": "실시간 비디오 채팅 서비스",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/2020_09_video_sharing_chat_page/main/public/realtime-video-chat.jpg",
+      "description": "NodeJS 실시간 영상 공유 채팅 웹사이트",
       "category": "Web",
-      "tags": ["CSR", "SWR"],
+      "tags": ["Node.JS", "MySQL", "Socket.IO"],
       "link": "#"
     },
     {
-      "id": "p6",
-      "title": "VR Scene Prototype",
-      "description": "Three.js/React-Three-Fiber로 인터랙티브 씬 프로토타입.",
-      "category": "Experiment",
-      "tags": ["three.js", "R3F"],
+      "id": "324820828",
+      "title": "해외축구 뉴스 웹사이트",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/2020_03_World_Soccer_Final/main/public/world-football.jpg",
+      "description": "NodeJS 해외축구 뉴스 웹사이트",
+      "category": "Web",
+      "tags": ["Node.JS", "MySQL", "Socket.IO"],
       "link": "#"
     },
     {
-      "id": "p7",
-      "title": "Dummy 7",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment",
-      "tags": ["Demo"]
-    },
-    {
-      "id": "p8",
-      "title": "Dummy 8",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data",
-      "tags": ["Demo"]
-    },
-    {
-      "id": "p9",
-      "title": "Dummy 9",
-      "description": "무한 스크롤 테스트용 더미 카드.",
+      "id": "460561609",
+      "title": "COIN TRACKER",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/React_coin_tracking_application/master/public/coin.jpg",
+      "description": "암호화폐의 시세와 그래프를 확인할 수 있는 리액트 + 타입스크립트 프로젝트",
       "category": "Web",
-      "tags": ["Demo"]
+      "tags": ["REACT", "Recoil", "ApexCharts"],
+      "link": "#"
     },
     {
-      "id": "p10",
-      "title": "Dummy 10",
-      "description": "무한 스크롤 테스트용 더미 카드.",
+      "id": "489676567",
+      "title": "당근마켓 클론코딩",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/carrot-market-exercise/master/public/carrot.jpg",
+      "description": "Next.js와 Tailwinds CSS를 이용한 당근마켓 클론코딩",
       "category": "Web",
-      "tags": ["Demo"]
+      "tags": ["REACT", "Recoil", "Tailwinds CSS"],
+      "link": "#"
     },
     {
-      "id": "p11",
-      "title": "Dummy 11",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data"
-    },
-    {
-      "id": "p12",
-      "title": "Dummy 12",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment"
-    },
-    {
-      "id": "p13",
-      "title": "Dummy 13",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Web"
-    },
-    {
-      "id": "p14",
-      "title": "Dummy 14",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data"
-    },
-    {
-      "id": "p15",
-      "title": "Dummy 15",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment"
-    },
-    {
-      "id": "p16",
-      "title": "Dummy 16",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment",
-      "tags": ["Demo"]
-    },
-    {
-      "id": "p17",
-      "title": "Dummy 17",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data",
-      "tags": ["Demo"]
-    },
-    {
-      "id": "p18",
-      "title": "Dummy 18",
-      "description": "무한 스크롤 테스트용 더미 카드.",
+      "id": "489703202",
+      "title": "29CM 클론코딩",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/Market-29cm/master/public/29cm.jpg",
+      "description": "Next.js와 Tailwinds CSS를 이용한 29CM 클론코딩",
       "category": "Web",
-      "tags": ["Demo"]
+      "tags": ["REACT", "Recoil", "Tailwinds CSS", "FireBase DB"],
+      "link": "#"
     },
     {
-      "id": "p19",
-      "title": "Dummy 19",
-      "description": "무한 스크롤 테스트용 더미 카드.",
+      "id": "562470127",
+      "title": "Momentum Clone",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/next-v13-moment/main/public/momentum.jpg",
+      "description": "Next.js와 Tailwind CSS를 이용한 Momentum 클론코딩 프로젝트",
       "category": "Web",
-      "tags": ["Demo"]
+      "tags": ["REACT", "Recoil", "styled-components", "FireBase DB"],
+      "link": "#"
     },
     {
-      "id": "p20",
-      "title": "Dummy 20",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data"
+      "id": "586550881",
+      "title": "카카오 & 네이버 로그인",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/kakao-naver-next-auth/main/public/douauth.jpg",
+      "description": "Next.js와 Prisma DB를 이용한 카카오, 네이버 SNS로그인 구현 프로젝트",
+      "category": "Web",
+      "tags": ["REACT", "Recoil", "styled-components", "Prisma"],
+      "link": "#"
     },
     {
-      "id": "p21",
-      "title": "Dummy 21",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment"
+      "id": "560046328",
+      "title": "NEXTAUTH",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/nextauth-credentials/main/public/auth.jpg",
+      "description": "Next.js와 Prisma DB를 이용한 로그인(세션+쿠키) 관리 프로젝트",
+      "category": "Web",
+      "tags": ["REACT", "Recoil", "styled-components", "Prisma"],
+      "link": "#"
     },
     {
-      "id": "p22",
-      "title": "Dummy 22",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Web"
-    },
-    {
-      "id": "p23",
-      "title": "Dummy 23",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data"
-    },
-    {
-      "id": "p24",
-      "title": "Dummy 24",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment"
-    },
-    {
-      "id": "p25",
-      "title": "Dummy 25",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Web"
-    },
-    {
-      "id": "p26",
-      "title": "Dummy 26",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data"
-    },
-    {
-      "id": "p27",
-      "title": "Dummy 27",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment"
-    },
-    {
-      "id": "p28",
-      "title": "Dummy 28",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Web"
-    },
-    {
-      "id": "p29",
-      "title": "Dummy 29",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Data"
-    },
-    {
-      "id": "p30",
-      "title": "Dummy 30",
-      "description": "무한 스크롤 테스트용 더미 카드.",
-      "category": "Experiment"
+      "id": "592823271",
+      "title": "STREAMFLIX",
+      "working": "2025.05",
+      "img": "https://raw.githubusercontent.com/choidy180/nextjsv13_netflix/main/public/stream.jpg",
+      "description": "Next.js v13+ · Tailwind CSS · Firebase · Stripe · TMDB API",
+      "category": "Web",
+      "tags": ["REACT", "Recoil", "styled-components", "FireBase DB","Stripe"],
+      "link": "#"
     }
   ]
 }

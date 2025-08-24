@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
     },
     transpilePackages: ['@appletosolutions/reactbits'],
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'raw.githubusercontent.com',
+                pathname: '/**',
+            },
+        ],
+    },
 };
 
 export default nextConfig;

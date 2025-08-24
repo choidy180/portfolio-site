@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import data from '@/json/projects.json'; // 로컬 JSON 직접 import
 import TextType from '@/components/textType';
+import Image from 'next/image';
+import Prism from '@/components/prism';
 
 /**
  * Projects Page (with Search + Infinite Scroll)
@@ -23,7 +25,12 @@ export type Project = {
   category: string;
   tags?: string[];
   link?: string;
+  img?: string;
 };
+
+interface CardTitleProps {
+  variant?: string;
+}
 
 export default function ProjectsPage() {
   // Raw data (local import)
@@ -89,6 +96,17 @@ export default function ProjectsPage() {
 
   return (
     <PageRoot>
+      <Prism
+        animationType="rotate"
+        timeScale={0.5}
+        height={3.5}
+        baseWidth={5.5}
+        scale={3.6}
+        hueShift={0}
+        colorFrequency={1}
+        noise={0.5}
+        glow={1}
+      />
       <Header>
         <Title>
           <TextType 
@@ -146,7 +164,17 @@ export default function ProjectsPage() {
                 <CardBody onClick={() => setActive(p)} tabIndex={0} onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(p); }
                 }}>
-                  <CardTitle>{p.title}</CardTitle>
+                  <TitleBox>
+                    <Image
+                        src={p.img}
+                        width={70}
+                        height={28}
+                        alt={p.title}
+                      />
+                    <CardTitle variant={p.id}>
+                      {p.title}
+                    </CardTitle>
+                  </TitleBox>
                   <CardDesc>{p.description}</CardDesc>
                   {p.tags && p.tags.length > 0 && (
                     <TagRow>
@@ -176,7 +204,7 @@ export default function ProjectsPage() {
               {active.tags?.map((t) => (<MetaBadge key={t}>{t}</MetaBadge>))}
             </MetaRow>
             {active.link && (
-              <ModalLink href={active.link} onClick={(e) => e.preventDefault()}>
+              <ModalLink onClick={()=> window.open(`${active.link}`)}>
                 Visit Project →
               </ModalLink>
             )}
@@ -218,11 +246,10 @@ function Modal(
 }
 
 
-// ========= styled (tab-size: 2) =========
 const PageRoot = styled.main`
   tab-size: 2;
   min-height: 100vh;
-  background: #0b0b0b;
+  background: #2B2B2B;
   color: #e5e7eb;
   padding: 48px 20px 72px;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -275,9 +302,9 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   width: 100%;
   padding: 12px 14px;
-  background: #111827;
+  background: #141414;
   color: #e5e7eb;
-  border: 1px solid #1f2937;
+  border: 1px solid #141414;
   border-radius: 10px;
   font-size: 1rem;
   outline: none;
@@ -343,14 +370,15 @@ const Grid = styled.div`
 `;
 
 const Card = styled.article`
-  background: #1f2937;
-  border: 1px solid #1f2937;
+  background: #141414;
+  border: 1px solid #141414;
   border-radius: 14px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   width: calc(33.3333% - 9.5px);
-  height: 160px;
+  height: 220px;
+  transition: all ease-in-out .15s;
 `;
 
 const CardBody = styled.button`
@@ -364,17 +392,68 @@ const CardBody = styled.button`
   font-family: 'Paperlogy-4Regular';
 `;
 
-const CardTitle = styled.h3`
-  margin: 0 0 6px;
-  font-size: 1.2rem;
-  color: #ffffff;
+const TitleBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  img {
+    margin-right: 8px;
+    object-fit: cover;
+  }
+`
+
+const CardTitle = styled.span<CardTitleProps>`
+  margin: 0 0 0 0px;
+  font-size: 1.1rem;
+  background-color: ${({ variant }) =>
+    variant === '1036335472' ? '#3565AE' :
+    variant === '994912091' ? '#1DB954' :
+    variant === '914358369' ? '#1DB954' :
+    variant === '289918118' ? '#2C1B12' :
+    variant === '324815810' ? '#253220' :
+    variant === '324817627' ? '#111C27' :
+    variant === '324820828' ? '#12351F' :
+    variant === '460561609' ? '#0B1D2E' :
+    variant === '489676567' ? '#D9D5CD' :
+    variant === '489703202' ? '#C6C6C6' :
+    variant === '562470127' ? '#FFFFFF' :
+    variant === '560046328' ? '#E24287' :
+    variant === '586550881' ? 'linear-gradient(90deg, #FEE500 0 50%, #03C75A 50% 100%)' :
+    variant === '592823271' ? '#f00' :
+    variant === '1008661698' ? '#01B4E4' : '#f00'};
+  color: ${({ variant }) =>
+    variant === '1036335472' ? '#ffffff' :
+    variant === '994912091' ? '#000000' :
+    variant === '914358369' ? '#ffffff' :
+    variant === '289918118' ? '#F4A44E' :
+    variant === '324815810' ? '#E8E0CF' :
+    variant === '324817627' ? '#F27822' :
+    variant === '324820828' ? '#E8E0CF' :
+    variant === '460561609' ? '#FFFFFF' :
+    variant === '489676567' ? '#222322' :
+    variant === '489703202' ? '#060606' :
+    variant === '562470127' ? '#060606' :
+    variant === '560046328' ? '#ffffff' :
+    variant === '586550881' ? '#000000' :
+    variant === '592823271' ? '#000000' :
+    variant === '1008661698' ? '#ffffff' : '#ffffff'};
+  background: ${({ variant }) => 
+    variant === '586550881' ? 'linear-gradient(90deg, #FEE500 0 50%, #03C75A 50% 100%)' : 'transparents'};
+  width: auto;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-family: 'GongGothicMedium';
 `;
 
 const CardDesc = styled.p`
-  margin: 0 0 10px;
+  margin: 10px 0 0 0px;
   font-size: 1rem;
   color: #d4d4d4;
   line-height: 1.4rem;
+  margin-top: 20px;
 `;
 
 const TagRow = styled.div`
@@ -389,7 +468,7 @@ const Tag = styled.span`
   padding: 4px 8px;
   border-radius: 999px;
   background: #111827;
-  border: 1px solid #1f2937;
+  border: 1px solid #fcfcfc;
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -505,7 +584,7 @@ const MetaBadge = styled.span`
   color: #d1fae5;
 `;
 
-const ModalLink = styled.a`
+const ModalLink = styled.span`
   display: inline-block;
   font-size: 14px;
   color: #22d3ee;
