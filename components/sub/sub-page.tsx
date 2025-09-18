@@ -436,8 +436,9 @@ const ModalPanel = styled.div`
   width: min(720px, 92vw);
   border: 1px solid #1f2937;
   border-radius: 16px;
-  background: radial-gradient(800px 400px at 50% 0%, rgba(34,211,238,.08) 0%, rgba(2,6,23,1) 60%, #020617 100%);
-  color: #e5e7eb;
+  /* background: radial-gradient(800px 400px at 50% 0%, rgba(34,211,238,.08) 0%, rgba(2,6,23,1) 60%, #020617 100%); */
+  background: #141414;
+  color: #ffffff;
   box-shadow: 0 10px 40px rgba(0,0,0,.35);
 `;
 
