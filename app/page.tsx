@@ -7,8 +7,9 @@ import ContentBox3 from '@/components/contentBox3';
 import FuzzyText from '@/components/fuzzyText';
 import Introduce from '@/components/introduce';
 import styled from 'styled-components';
-import GlobalStyle, { Section, SnapContainer } from './GlobalStyle';
+import GlobalStyle, { Section, SectionSide, SnapContainer } from './GlobalStyle';
 import ContentBox4 from '@/components/contentBox4';
+import SideProjectsPage from '@/components/side-project-page';
 
 const CoverWrapper = styled.div`
     width: 100vw;
@@ -117,6 +118,7 @@ export default function Cover() {
                     <Section><ContentBox2 /></Section>
                     <Section><ContentBox4 /></Section>
                     <Section><ContentBox3 /></Section>
+                    <SectionSide><SideProjectsPage/></SectionSide>
             </SnapContainer>
         </>
     );

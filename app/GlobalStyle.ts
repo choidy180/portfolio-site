@@ -25,4 +25,12 @@ export const Section = styled.section`
   overflow: hidden;              /* 내부가 커도 한 화면로 보이게 */
 `;
 
+export const SectionSide = styled.section`
+  position: relative;
+  min-height: 100vh;                 /* 한 섹션이 한 화면 */
+  scroll-snap-align: start;      /* 시작점에서 스냅 */
+  scroll-snap-stop: always;      /* 빠르게 스크롤해도 한 섹션씩 멈춤 */
+  overflow: hidden;              /* 내부가 커도 한 화면로 보이게 */
+`;
+
 export default GlobalStyle;
