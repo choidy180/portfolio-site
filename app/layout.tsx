@@ -10,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <title>민석킴</title>
+      <title>김민석 포트폴리오</title>
       <body>
         <ViewportGate minWidth={1400}>
           <AOSProvider>
