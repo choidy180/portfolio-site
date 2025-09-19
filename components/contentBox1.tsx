@@ -260,9 +260,9 @@ export default function ContentBox1() {
             </Icon>
           </IconBox>
           <RightBox>
-            <VisitButton onClick={() => setIsOpen(true)}>
+            {/* <VisitButton onClick={() => setIsOpen(true)}>
               <span>READ ME</span> <RiExternalLinkFill />
-            </VisitButton>
+            </VisitButton> */}
             <VisitButton onClick={()=> window.open(`https://interview.highbuff.com/`)}>
               <span>자세히 보기</span> <RiExternalLinkFill />
             </VisitButton>
